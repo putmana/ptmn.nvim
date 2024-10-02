@@ -2,4 +2,17 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  -- AUTOPAIRS --
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    opts = {},
+  },
+
+  -- AUTOTAG --
+  {
+    'windwp/nvim-ts-autotag',
+    opts = {},
+  },
+}
