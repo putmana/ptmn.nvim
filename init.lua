@@ -109,6 +109,10 @@ vim.opt.shiftwidth = 4
 
 -- Set tabstop
 vim.opt.tabstop = 4
+vim.opt.softtabstop = 0
+
+-- Set expandtab
+vim.opt.expandtab = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -197,6 +201,12 @@ vim.keymap.set('n', '<S-Down>', '<C-w>s', { desc = 'Split window vertically' })
 vim.keymap.set('n', '<S-Up>', '<C-w>s', { desc = 'Split window vertically' })
 vim.keymap.set('n', '<S-Left>', '<C-w>v', { desc = 'Split window horizontally' })
 vim.keymap.set('n', '<S-Right>', '<C-w>v', { desc = 'Split window horizontally' })
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -783,12 +793,12 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
           --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
           --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.

@@ -15,4 +15,11 @@ return {
     'windwp/nvim-ts-autotag',
     opts = {},
   },
+
+  -- INDENT BLANKLINE --
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {},
+  },
 }
