@@ -16,6 +16,13 @@ return {
     opts = {},
   },
 
+  -- COLORIZWER --
+  {
+    'catgoose/nvim-colorizer.lua',
+    event = 'BufReadPre',
+    opts = {},
+  },
+
   -- INDENT BLANKLINE --
   {
     'lukas-reineke/indent-blankline.nvim',
