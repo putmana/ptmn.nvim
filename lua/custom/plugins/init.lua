@@ -54,4 +54,10 @@ return {
       },
     },
   },
+
+  -- ROSLYN --
+  {
+    'seblyng/roslyn.nvim',
+    opts = {},
+  },
 }

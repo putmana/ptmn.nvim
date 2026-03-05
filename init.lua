@@ -358,7 +358,7 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    branch = 'master',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -650,6 +650,10 @@ require('lazy').setup({
         --
         --
         --
+        roslyn = {
+          cmd = { 'roslyn' },
+          filetypes = { 'cs' },
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -675,6 +679,10 @@ require('lazy').setup({
       --  You can press `g?` for help in this menu.
       require('mason').setup {
         log_level = vim.log.levels.DEBUG,
+        registries = {
+          'github:mason-org/mason-registry',
+          'github:Crashdummyy/mason-registry',
+        },
       }
 
       -- You can add other tools here that you want Mason to install
@@ -728,7 +736,7 @@ require('lazy').setup({
           lsp_format_opt = 'fallback'
         end
         return {
-          timeout_ms = 500,
+          timeout_ms = 3000,
           lsp_format = lsp_format_opt,
         }
       end,
@@ -736,6 +744,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         javascript = { 'biome', 'prettier', stop_after_first = true },
         typescript = { 'biome', 'prettier', stop_after_first = true },
+        cs = { 'csharpier', stop_after_first = true },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -925,11 +934,11 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = {
+    main = 'nvim-treesitter.config', -- Sets main module to use for opts
+    config = function()
+      require('nvim-treesitter').install {
         'bash',
         'c',
         'diff',
@@ -941,28 +950,13 @@ require('lazy').setup({
         'markdown_inline',
         'query',
         'sql',
+        'scss',
+        'svelte',
         'vim',
         'vimdoc',
         'typescript',
-        'svelte',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+      }
+    end,
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
